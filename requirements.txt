@@ -1,0 +1,11 @@
+djangorestframework
+django-cors-headers
+django-resized
+django-nested-inline
+django-modeltranslation
+pillow
+djoser
+pytils
+django-cleanup
+django-ckeditor-5
+django-filter
