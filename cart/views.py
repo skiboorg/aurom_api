@@ -20,10 +20,15 @@ class CartView(APIView):
 
 
     def delete(self, request):
-        cart = get_cart(request)
-        cart.delete()
-        get_cart(request)
-        result = {'result': True,'message':'Корзина очищена'}
+        product_id = request.query_params.get('product_id', None)
+        if product_id:
+            CartItem.objects.get(id=product_id).delete()
+            result = {'result': True, 'message': 'Товар удален'}
+        else:
+            cart = get_cart(request)
+            cart.delete()
+            get_cart(request)
+            result = {'result': True,'message':'Корзина очищена'}
         return Response(result, status=200)
 
     def patch(self, request):

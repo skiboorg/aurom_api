@@ -42,8 +42,10 @@ class Product(models.Model):
     delivery = models.CharField('Срок поставки', max_length=100, blank=True, null=True)
     in_stock = models.CharField('В наличии' ,max_length=100, blank=True, null=True)
     unit = models.CharField('Фасовка', max_length=255, blank=True, null=True)
-    price = models.DecimalField('Цена', decimal_places=2,max_digits=10, blank=True, null=True)
-    price_opt = models.DecimalField('Цена опт', decimal_places=2,max_digits=10, blank=True, null=True)
+    price = models.IntegerField('Цена EURO', default=0, blank=True)
+    price_usd = models.IntegerField('Цена $', default=0, blank=True)
+    price_rub = models.IntegerField('Цена RUB', default=0, blank=True)
+    price_opt = models.IntegerField('Цена опт', default=10, blank=True, editable=False)
     price_description = models.CharField('Описание цены', blank=True, null=True, max_length=200)
 
     is_new = models.BooleanField('Новинка', default=False, null=False)
