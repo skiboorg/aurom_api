@@ -45,7 +45,7 @@ class Product(models.Model):
     price = models.DecimalField('Цена EURO', default=0, decimal_places=2,max_digits=10, blank=True)
     price_usd = models.DecimalField('Цена $', default=0,decimal_places=2,max_digits=10, blank=True)
     price_rub = models.DecimalField('Цена RUB', default=0, decimal_places=2,max_digits=10, blank=True)
-    price_opt = models.DecimalField('Цена опт', default=0, decimal_places=2,max_digits=10, blank=True, editable=False)
+    price_opt = models.DecimalField('Цена опт', default=0, decimal_places=2,max_digits=10, blank=True)
     price_description = models.CharField('Описание цены', blank=True, null=True, max_length=200)
 
     is_new = models.BooleanField('Новинка', default=False, null=False)
