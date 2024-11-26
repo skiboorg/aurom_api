@@ -8,8 +8,9 @@ from django_resized import ResizedImageField
 
 class Category(models.Model):
     order_num = models.IntegerField(default=1, null=True)
-    image = ResizedImageField(size=[60, 100], quality=95, force_format='WEBP', upload_to='shop/category/images',
-                              blank=True, null=True)
+    image = models.FileField(upload_to='shop/category/images', blank=True, null=True)
+    # image = ResizedImageField(size=[60, 100], quality=95, force_format='WEBP', upload_to='shop/category/images',
+    #                           blank=True, null=True)
     name = models.CharField('Название', max_length=255, blank=True, null=False)
     slug = models.CharField('ЧПУ', max_length=255,blank=True, null=True)
     short_description = models.TextField('Короткое описание', blank=True, null=False)
