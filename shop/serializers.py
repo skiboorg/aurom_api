@@ -11,6 +11,11 @@ class ProductImageSerializer(serializers.ModelSerializer):
         model = ProductImage
         fields = '__all__'
 
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        exclude = ['name_en', 'name_ru']
+
 class ProductUnitSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductUnit
@@ -25,7 +30,7 @@ class ProductSerializer(serializers.ModelSerializer):
     units = ProductUnitSerializer(many=True,required=False,read_only=True)
     cat_slug = serializers.SerializerMethodField()
     cat_name = serializers.SerializerMethodField()
-
+    tags = TagSerializer(many=True, required=False, read_only=True)
     exclude = ['description_editor']
 
     class Meta:
@@ -77,4 +82,4 @@ class CategorySerializer(serializers.ModelSerializer):
 class CategoryShortSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['image','name','slug','short_description','display_amount']
+        fields = ['image','top_image','name','slug','short_description','display_amount']

@@ -2,6 +2,7 @@ from django.contrib import admin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from django.utils.safestring import mark_safe
 from .models import *
+
 class ProductUnitInline(NestedStackedInline):
     model = ProductUnit
     extra = 0
@@ -32,5 +33,6 @@ class ProductAdmin(NestedModelAdmin):
 
 
 admin.site.register(Category)
+admin.site.register(Tag)
 admin.site.register(Product, ProductAdmin)
 

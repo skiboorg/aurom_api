@@ -6,11 +6,17 @@ from django_resized import ResizedImageField
 
 
 
+class Tag(models.Model):
+    name = models.CharField('Название', max_length=255, blank=True, null=False)
+
+    def __str__(self):
+        return f'{self.name}'
+
 class Category(models.Model):
     order_num = models.IntegerField(default=1, null=True)
     image = models.FileField(upload_to='shop/category/images', blank=True, null=True)
-    # image = ResizedImageField(size=[60, 100], quality=95, force_format='WEBP', upload_to='shop/category/images',
-    #                           blank=True, null=True)
+    top_image = ResizedImageField(size=[1380, 300], quality=95, force_format='WEBP', upload_to='shop/category/images',
+                              blank=True, null=True)
     name = models.CharField('Название', max_length=255, blank=True, null=False)
     slug = models.CharField('ЧПУ', max_length=255,blank=True, null=True)
     short_description = models.TextField('Короткое описание', blank=True, null=False)
@@ -41,6 +47,7 @@ class Product(models.Model):
     article = models.CharField('Артикул', max_length=20,blank=True, null=True)
     country = models.CharField('Страна производства', max_length=100, blank=True, null=True)
     delivery = models.CharField('Срок поставки', max_length=100, blank=True, null=True)
+    tags = models.ManyToManyField(Tag, max_length=100, blank=True, related_name='Теги')
     in_stock = models.CharField('В наличии' ,max_length=100, blank=True, null=True)
     unit = models.CharField('Фасовка', max_length=255, blank=True, null=True)
     price = models.DecimalField('Цена EURO', default=0, decimal_places=2,max_digits=10, blank=True)

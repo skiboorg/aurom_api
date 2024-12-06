@@ -8,7 +8,11 @@ class CategoryTranslationOptions(TranslationOptions):
         'name',
         'short_description',
     )
-
+@register(Tag)
+class TagTranslationOptions(TranslationOptions):
+    fields = (
+        'name',
+    )
 @register(Product)
 class ProductTranslationOptions(TranslationOptions):
     fields = (

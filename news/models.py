@@ -37,3 +37,6 @@ class NewsItem(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+class Image(models.Model):
+    news_item = models.ForeignKey(NewsItem, on_delete=models.CASCADE, related_name='images')
+    image = models.FileField('Картинка', upload_to='news/images', blank=False, null=True)
