@@ -11,6 +11,11 @@ class ProductImageSerializer(serializers.ModelSerializer):
         model = ProductImage
         fields = '__all__'
 
+class ProductFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductFile
+        fields = '__all__'
+
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
@@ -27,7 +32,7 @@ class ProductUnitSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
 
     images = ProductImageSerializer(many=True,required=False,read_only=True)
-    units = ProductUnitSerializer(many=True,required=False,read_only=True)
+    files = ProductFileSerializer(many=True,required=False,read_only=True)
     cat_slug = serializers.SerializerMethodField()
     cat_name = serializers.SerializerMethodField()
     tags = TagSerializer(many=True, required=False, read_only=True)

@@ -96,6 +96,11 @@ class ProductImage(models.Model):
         verbose_name = 'Доп. изображение товара'
         verbose_name_plural = 'Доп. изображения товара'
 
+class ProductFile(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=False,
+                                related_name='files')
+    file = models.FileField(upload_to='shop/product/files', blank=True, null=True)
+
 class ProductUnit(models.Model):
     order_num = models.IntegerField(default=1, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=False,

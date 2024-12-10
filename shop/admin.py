@@ -13,10 +13,14 @@ class ProductImageInline(NestedStackedInline):
     model = ProductImage
     extra = 0
 
+class ProductFileInline(NestedStackedInline):
+    model = ProductFile
+    extra = 0
+
 class ProductAdmin(NestedModelAdmin):
     list_display = ('image_preview','category','article','name','is_new','is_popular',)
     model = Product
-    inlines = [ProductImageInline]
+    inlines = [ProductImageInline,ProductFileInline]
     readonly_fields = ['image_preview']
 
     def image_preview(self, obj):
