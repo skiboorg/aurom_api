@@ -6,4 +6,5 @@ urlpatterns = [
     path('category/<slug>', views.GetCategory.as_view()),
     path('product/<slug>', views.GetProduct.as_view()),
     path('popular', views.GetPopularProducts.as_view()),
+    path('search', views.ProductSearchView.as_view()),
 ]

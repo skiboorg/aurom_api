@@ -50,9 +50,9 @@ class Product(models.Model):
     tags = models.ManyToManyField(Tag, max_length=100, blank=True, related_name='Теги')
     in_stock = models.CharField('В наличии' ,max_length=100, blank=True, null=True)
     unit = models.CharField('Фасовка', max_length=255, blank=True, null=True)
-    price = models.DecimalField('Цена EURO', default=0, decimal_places=2,max_digits=10, blank=True)
+    price = models.DecimalField('Цена RUB', default=0, decimal_places=2,max_digits=10, blank=True)
     price_usd = models.DecimalField('Цена $', default=0,decimal_places=2,max_digits=10, blank=True)
-    price_rub = models.DecimalField('Цена RUB', default=0, decimal_places=2,max_digits=10, blank=True)
+    price_rub = models.DecimalField('Цена EURO', default=0, decimal_places=2,max_digits=10, blank=True)
     price_opt = models.DecimalField('Цена опт', default=0, decimal_places=2,max_digits=10, blank=True)
     price_description = models.CharField('Описание цены', blank=True, null=True, max_length=200)
 

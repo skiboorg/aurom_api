@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -32,3 +33,15 @@ class GetProduct(generics.RetrieveAPIView):
 class GetPopularProducts(generics.ListAPIView):
     serializer_class = ProductShortSerializer
     queryset = Product.objects.filter(is_popular=True, is_active=True)
+
+class ProductSearchView(APIView):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q', '')  # Получаем значение параметра "q" из GET-запроса
+        # Базовый запрос для поиска активных продуктов
+        products = Product.objects.filter(is_active=True)
+        products = products.filter(
+            Q(name__icontains=query) |
+            Q(article__icontains=query)
+        ).distinct()
+        serializer = ProductShortSerializer(products, many=True)
+        return Response(serializer.data)
