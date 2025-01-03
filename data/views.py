@@ -18,3 +18,20 @@ class NewForm(generics.CreateAPIView):
 
 
 
+
+class GetSales(generics.RetrieveAPIView):
+    serializer_class = SaleSerializer
+
+    def get_object(self):
+        sale_type = self.request.query_params.get('sale_type')
+        if sale_type == 'sale':
+            return Sale.objects.get(is_sale=True,is_active=True)
+        else:
+            return Sale.objects.get(is_sale=False,is_active=True)
+
+
+class GetCourses(generics.RetrieveAPIView):
+    serializer_class = CurrencySerializer
+
+    def get_object(self):
+        return Currency.objects.all().first()

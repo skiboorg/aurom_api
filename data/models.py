@@ -1,7 +1,36 @@
 from django.db import models
 from django_resized import ResizedImageField
-
+from django_ckeditor_5.fields import CKEditor5Field
 from shop.models import Product
+
+
+
+
+class Currency(models.Model):
+    eurRub = models.DecimalField(max_digits=6, decimal_places=2)
+    eurUsd = models.DecimalField(max_digits=6, decimal_places=2)
+
+
+class Sale(models.Model):
+    name = models.CharField('Название', max_length=255, blank=False, null=True)
+    slug = models.CharField('ЧПУ', max_length=255,
+                            help_text='Если не заполнено, создается на основе поля Назавание',
+                            blank=True, null=True, editable=False)
+
+    content_editor = CKEditor5Field('Редактор', blank=True, null=True, config_name='extends')
+    content = models.TextField('Контент', blank=True, null=True)
+    is_sale = models.BooleanField('Это распродажа', default=False, null=False)
+    is_active = models.BooleanField('Активно', default=False, null=False)
+    product = models.ManyToManyField(Product, blank=False)
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+
+    class Meta:
+        verbose_name = 'Акции'
+        verbose_name_plural = 'Акции'
 
 
 class CallbackForm(models.Model):

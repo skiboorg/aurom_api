@@ -15,4 +15,6 @@ class CallbackFormAdmin(admin.ModelAdmin):
     model = CallbackForm
 
 
-admin.site.register(CallbackForm,CallbackFormAdmin)
+# admin.site.register(CallbackForm,CallbackFormAdmin)
+admin.site.register(Currency)
+admin.site.register(Sale)

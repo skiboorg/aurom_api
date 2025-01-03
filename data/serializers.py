@@ -1,7 +1,17 @@
 from rest_framework import serializers
 from .models import *
+from shop.serializers import ProductShortSerializer
 
+class CurrencySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Currency
+        fields = '__all__'
 
+class SaleSerializer(serializers.ModelSerializer):
+    product = ProductShortSerializer(many=True, read_only=True)
+    class Meta:
+        model = Sale
+        fields = '__all__'
 
 class BannerSerializer(serializers.ModelSerializer):
     class Meta:
