@@ -23,7 +23,7 @@ class Payment(models.Model):
     image = ResizedImageField(size=[800, 600], quality=95, force_format='WEBP', upload_to='shop/order/payment',
                               blank=False, null=True)
     description = models.TextField('Описание оплаты', blank=True, null=True)
-
+    is_online = models.BooleanField(default=False, null=False)
     def __str__(self):
         return f'{self.name}'
 
@@ -62,3 +62,17 @@ class OrderItem(models.Model):
     price = models.CharField('Цена', max_length=255, blank=True, null=True)
     amount = models.IntegerField(default=0, blank=True, null=True)
 
+
+
+class PaymentObj(models.Model):
+    payment_id = models.CharField(max_length=255, null=True, blank=True)
+    order = models.ForeignKey(Order,
+                              blank=True,
+                              null=True,
+                              default=None,
+                              on_delete=models.CASCADE,
+                              verbose_name='Заказ',
+                              related_name='order_payment')
+    status = models.BooleanField(default=False)
+    amount = models.DecimalField(default=0,decimal_places=2, max_digits=10)
+    created_at = models.DateTimeField(auto_now_add=True)
